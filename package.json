@@ -1,0 +1,22 @@
+{
+  "name": "web3d",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack serve"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "three": "^0.173.0",
+    "three-orbitcontrols": "^2.110.2"
+  },
+  "devDependencies": {
+    "vite": "^6.1.0",
+    "webpack": "^5.98.0",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.0"
+  }
+}
