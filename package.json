@@ -10,6 +10,8 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "dat.gui": "^0.7.9",
+    "gsap": "^3.12.7",
     "three": "^0.173.0",
     "three-orbitcontrols": "^2.110.2"
   },
