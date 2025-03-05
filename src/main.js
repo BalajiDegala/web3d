@@ -6,6 +6,8 @@ import { loadModel } from './components/loadModel.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { gsap } from 'gsap/gsap-core';
 import { GUI } from 'dat.gui';
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
+import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x000000);
@@ -40,15 +42,49 @@ gltfloader.load('./src/assets/models/office.glb', (gltf) =>
 
 })
 
+function createTextMaterial(text, color, backgroundColor) {
+  const canvas = document.createElement('canvas');
+  const context = canvas.getContext('2d');
+
+  // Set canvas size
+  canvas.width = 256;
+  canvas.height = 256;
+
+  // Fill background color
+  context.fillStyle = backgroundColor;
+  context.fillRect(0, 0, canvas.width, canvas.height);
+
+  // Draw text
+  context.fillStyle = color;
+  context.font = '30px Arial';
+  context.textAlign = 'center';
+  context.textBaseline = 'middle';
+  context.fillText(text, canvas.width / 2, canvas.height / 2);
+
+  // Create texture
+  const texture = new THREE.CanvasTexture(canvas);
+  return new THREE.MeshBasicMaterial({ map: texture });
+}
+
+
 // Raycaster and mouse
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 
-const geometry = new THREE.BoxGeometry(0.12,0.19,0.1);
-const material = new THREE.MeshBasicMaterial({color: 0x00ff00, transparent: true, opacity: 0});
-const tasks = new THREE.Mesh(geometry, material);
-tasks.position.set(-0.18, 0.14, -0.65);
-scene.add(tasks);
+const ayon_geometry = new THREE.BoxGeometry(0.1,0.1,0.1);
+const zulip_geometry = new THREE.BoxGeometry(0.1,0.1,0.1);
+
+const ayonMaterial = createTextMaterial('Ayon', '#00ff00', '#000000');
+const zulipMaterial = createTextMaterial('Zulip', '#ffffff', '#0000ff');
+const ayon = new THREE.Mesh(ayon_geometry, ayonMaterial);
+const zulip = new THREE.Mesh(zulip_geometry, zulipMaterial);
+
+ayon.position.set(-0.18, 0.14, -0.65);
+zulip.position.set(-0.38, 0.14, -0.65);
+
+scene.add(ayon);
+scene.add(zulip);
+
 
 // Add click event listener
 window.addEventListener('click', (event) => {
@@ -59,11 +95,10 @@ window.addEventListener('click', (event) => {
   // Set raycaster with the camera and mouse
   raycaster.setFromCamera(mouse, camera);
 
-  // Check for intersections
-  const intersects = raycaster.intersectObject(tasks);
-
-  if (intersects.length > 0) {
-    console.log('tasks clicked!');
+  // Check for intersections with ayon
+  const ayon_intersects = raycaster.intersectObject(ayon);
+  if (ayon_intersects.length > 0) {
+    console.log('Ayon clicked!');
 
     // Perform action: Move camera to a new location
     gsap.to(camera.position, { 
@@ -71,14 +106,32 @@ window.addEventListener('click', (event) => {
       y: 10, 
       z: 10, 
       duration: 2, 
-      onUpdate: () => camera.lookAt(tasks.position) 
+      onUpdate: () => camera.lookAt(ayon.position) 
     });
 
-    // Or navigate to another URL
-    window.location.href = "http://localhost:5173/";
+    // Navigate to localhost
+    window.location.href = "http://www.facebook.com/";
+    return; // Prevent further checks
+  }
+
+  // Check for intersections with zulip
+  const zulip_intersects = raycaster.intersectObject(zulip);
+  if (zulip_intersects.length > 0) {
+    console.log('Zulip clicked!');
+
+    // Perform action: Move camera to a different location
+    gsap.to(camera.position, { 
+      x: -10, 
+      y: 10, 
+      z: -10, 
+      duration: 2, 
+      onUpdate: () => camera.lookAt(zulip.position) 
+    });
+
+    // Navigate to Google
+    window.location.href = "https://www.google.com/";
   }
 });
-
 
   const pl = new THREE.PointLight(0x8FC1B5, 1, 2, 5);
   pl.position.set(0.8, 0.4, -0.8);
