@@ -91,7 +91,7 @@ window.addEventListener('click', (event) => {
         duration: 2, 
         onUpdate: () => camera.lookAt(ayon.position) 
       });
-      window.location.href = "http://localhost:30008";
+      window.location.href = "https://ayon.d2-india.com/";
       return; 
     }
   }
@@ -107,7 +107,7 @@ window.addEventListener('click', (event) => {
         duration: 2, 
         onUpdate: () => camera.lookAt(zulip.position) 
       });
-      window.location.href = "https://ddhb.zulipchat.com/";
+      window.location.href = "http://zulip.d2-india.com/";
     }
   }
 
@@ -122,7 +122,7 @@ window.addEventListener('click', (event) => {
         duration: 2, 
         onUpdate: () => camera.lookAt(space.position) 
       });
-      window.location.href = "http://127.0.0.1:8000";
+      window.location.href = "http://grid.d2-india.com";
     }
   }
 });
