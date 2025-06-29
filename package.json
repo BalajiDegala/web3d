@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "npx vite",
+    "prebuild": "node scripts/replaceUrls.js",
     "build": "vite build"
   },
   "keywords": [],
@@ -12,6 +13,7 @@
   "description": "",
   "dependencies": {
     "dat.gui": "^0.7.9",
+    "dotenv": "^17.0.0",
     "gsap": "^3.12.7",
     "three": "^0.173.0",
     "three-orbitcontrols": "^2.110.2"
