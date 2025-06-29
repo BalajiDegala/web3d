@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web3d
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web3d
+  template:
+    metadata:
+      labels:
+        app: web3d
+    spec:
+      containers:
+        - name: web3d
+          image: web3d:latest
+          ports:
+            - containerPort: 80
