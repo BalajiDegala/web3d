@@ -4,6 +4,10 @@ import { createCamera } from './components/camera.js';
 import { createRenderer } from './components/renderer.js';
 import { loadModel } from './components/loadModel.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import spaceBoiUrl from './assets/models/space_boi.glb?url';
+import zulipUrl from './assets/models/zulip.glb?url';
+import ayonUrl from './assets/models/ayon.glb?url';
+import spaceUrl from './assets/models/space.glb?url';
 import { gsap } from 'gsap/gsap-core';
 import { GUI } from 'dat.gui';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
@@ -26,7 +30,7 @@ scene.add(light);
 scene.add(al)
 
 const gltfloader = new GLTFLoader();
-gltfloader.load('./src/assets/models/space_boi.glb', (gltf) => 
+gltfloader.load(spaceBoiUrl, (gltf) =>
   {
   const model = gltf.scene;
 
@@ -41,7 +45,7 @@ gltfloader.load('./src/assets/models/space_boi.glb', (gltf) =>
 
 
 const gltfloader1 = new GLTFLoader();
-gltfloader1.load('./src/assets/models/zulip.glb', (gltf) => {
+gltfloader1.load(zulipUrl, (gltf) => {
   zulip = gltf.scene; // Assign to global variable
   zulip.position.set(5, 4, 0);
   zulip.rotation.y = 0.6;
@@ -50,7 +54,7 @@ gltfloader1.load('./src/assets/models/zulip.glb', (gltf) => {
 });
 
 const gltfloader2 = new GLTFLoader();
-gltfloader2.load('./src/assets/models/ayon.glb', (gltf) => {
+gltfloader2.load(ayonUrl, (gltf) => {
   ayon = gltf.scene; // Assign to global variable
   ayon.position.set(-2, 2, 6);
   ayon.rotation.y = 0.7;
@@ -59,7 +63,7 @@ gltfloader2.load('./src/assets/models/ayon.glb', (gltf) => {
 });
 
 const gltfloader3 = new GLTFLoader();
-gltfloader3.load('./src/assets/models/space.glb', (gltf) => {
+gltfloader3.load(spaceUrl, (gltf) => {
   space = gltf.scene; // Assign to global variable
   space.position.set(3.5, 4, 7);
   space.rotation.y = 0.7;
