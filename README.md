@@ -9,7 +9,13 @@ This project uses environment variables to configure where some links lead.
    - `ZULIP_URL`
    - `SPACE_URL`
    - `TASKS_URL`
-2. Run the build process:
+2. Install dependencies (if you haven't already):
+
+```bash
+npm ci
+```
+
+3. Run the build process:
 
 ```bash
 npm run build
